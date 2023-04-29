@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:user_app/view/explorer_view.dart';
+import 'package:user_app/view/home_view.dart';
+import 'package:user_app/view/mypage_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Demo'),
     );
   }
 }
@@ -48,22 +51,31 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-    ),
-    Text(
-      'Index 1: search page',
-    ),
-    Text(
-      'Index 2: mypage',
-    ),
+    HomeScreen(),
+    ExplorerScreen(),
+    MyPageScreen(),
   ];
+  //   Text(
+  //     'Index 0: Home',
+  //   ),
+  //   Text(
+  //     'Index 1: search page',
+  //   ),
+  //   Text(
+  //     'Index 2: mypage',
+  //   ),
+  // ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(
+            widget.title,
+            style: TextStyle(color: Colors.green),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 1.0,
         ),
         body: Center(child: _widgetOptions.elementAt(_selectecIndex)),
         bottomNavigationBar: BottomNavigationBar(
@@ -74,6 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(Icons.account_circle), label: 'MY'),
           ],
           onTap: (value) => _onTab(value),
+          selectedItemColor: Colors.green[800],
+          currentIndex: _selectecIndex,
         ));
   }
 }
