@@ -13,7 +13,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("MY 페이지"),
+      child: Text("MY2 페이지"),
     );
   }
 }
