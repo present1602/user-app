@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:user_app/core/routes/routes.dart';
+import 'package:user_app/core/routes/routes_name.dart';
 import 'package:user_app/view/explorer_view.dart';
 import 'package:user_app/view/home_view.dart';
 import 'package:user_app/view/mypage_view.dart';
@@ -18,7 +20,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Demo'),
+      // home: const MyHomePage(title: 'Demo'),
+      initialRoute: RoutesName.home,
+      routes: namedRoutes,
+      // routes: {
+      //   '/': (context) => HomeScreen(),
+      //   '/mypage': (context) => MyPageScreen(),
+      // },
     );
   }
 }
@@ -77,7 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.white,
           elevation: 1.0,
         ),
-        body: Center(child: _widgetOptions.elementAt(_selectecIndex)),
+        body: Center(
+          child: _widgetOptions.elementAt(_selectecIndex),
+        ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
