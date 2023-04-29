@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:user_app/core/routes/routes.dart';
 import 'package:user_app/core/routes/routes_name.dart';
 import 'package:user_app/view/explorer_view.dart';
@@ -6,6 +7,14 @@ import 'package:user_app/view/main_view.dart';
 import 'package:user_app/view/mypage_view.dart';
 
 void main() {
+  // KakaoSdk.init(
+  //       nativeAppKey: '${YOUR_NATIVE_APP_KEY}',
+  //       javaScriptAppKey: '${YOUR_JAVASCRIPT_APP_KEY}',
+  //   );
+  KakaoSdk.init(
+    nativeAppKey: "785a5cbddd6caa3c085494e0eb426f66",
+  );
+
   runApp(const MyApp());
 }
 
@@ -21,7 +30,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.green,
           scaffoldBackgroundColor: const Color(0xFFEFEFEF)),
       // home: const MyHomePage(title: 'Demo'),
-      initialRoute: RoutesName.home,
+      initialRoute: RoutesName.login,
       routes: namedRoutes,
       // routes: {
       //   '/': (context) => HomeScreen(),
