@@ -13,7 +13,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Home 페이지"),
-    );
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("FOOD"),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Text("coffee"),
+          Text("salad"),
+        ])
+      ],
+    ));
   }
 }
