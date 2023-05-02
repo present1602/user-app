@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:provider/provider.dart';
+import 'package:user_app/constants/theme_data.dart';
 import 'package:user_app/core/routes/routes.dart';
 import 'package:user_app/core/routes/routes_name.dart';
+import 'package:user_app/providers/dark_theme_provider.dart';
 import 'package:user_app/view/explorer_view.dart';
 import 'package:user_app/view/main_view.dart';
 import 'package:user_app/view/mypage_view.dart';
+// import 'package:provider/provider.dart';
 
 void main() {
   // KakaoSdk.init(
@@ -18,25 +22,62 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+
+  DarkThemeProvider themeChangeProvider = DarkThemeProvider();
+
+  void getCurrentAppTheme() async {
+    themeChangeProvider.setDarkTheme =
+        await themeChangeProvider.darkThemePrefs.getTheme();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+  }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     title: 'Flutter Demo',
+  //     // theme: ThemeData(
+  //     //     primarySwatch: Colors.green,
+  //     //     scaffoldBackgroundColor: const Color(0xFFEFEFEF)),
+  //     theme: Styles.themeData(true, context),
+  //     initialRoute: RoutesName.home,
+  //     routes: namedRoutes,
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-          primarySwatch: Colors.green,
-          scaffoldBackgroundColor: const Color(0xFFEFEFEF)),
-      // home: const MyHomePage(title: 'Demo'),
-      initialRoute: RoutesName.home,
-      routes: namedRoutes,
-      // routes: {
-      //   '/': (context) => HomeScreen(),
-      //   '/mypage': (context) => MyPageScreen(),
-      // },
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) {
+            return themeChangeProvider;
+          }),
+        ],
+        child:
+            Consumer<DarkThemeProvider>(builder: (context, themeData, child) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            // theme: ThemeData(
+            //     primarySwatch: Colors.green,
+            //     scaffoldBackgroundColor: const Color(0xFFEFEFEF)),
+            theme: Styles.themeData(themeChangeProvider.getDarkTheme, context),
+            initialRoute: RoutesName.home,
+            routes: namedRoutes,
+          );
+        }));
   }
 }
 
