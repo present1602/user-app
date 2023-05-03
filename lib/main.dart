@@ -18,24 +18,62 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _isDarkMode = false;
+
+  // IconData _iconLight = Icons.wb_sunny;
+  // IconData _iconDark = Icons.nights_stay;
+
+  ThemeData lightTheme = ThemeData(
+      primarySwatch: Colors.red,
+      scaffoldBackgroundColor: const Color(0xFFEFEFEF));
+
+  ThemeData darkTheme = ThemeData(
+      primarySwatch: Colors.green,
+      scaffoldBackgroundColor: const Color(0xFFEFEFEF));
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _switchTheme() {
+    setState(() {
+      _isDarkMode = !_isDarkMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-          primarySwatch: Colors.green,
-          scaffoldBackgroundColor: const Color(0xFFEFEFEF)),
-      // home: const MyHomePage(title: 'Demo'),
-      initialRoute: RoutesName.home,
+      theme: _isDarkMode ? darkTheme : lightTheme,
+      // theme: ThemeData(
+      //     primarySwatch: Colors.green,
+      //     scaffoldBackgroundColor: const Color(0xFFEFEFEF)),
+      // theme: _isDarkMode ? _darkTheme : _lightTheme,
+
+      // home: Scaffold(
+      //   appBar: AppBar(title: Text("Dark & light theme")),
+      //   body: Center(
+      //     child: ElevatedButton(
+      //       onPressed: () {
+      //         _switchTheme();
+      //       },
+      //       child: Text('theme change'),
+      //     ),
+      //   ),
+      // ),
+
+      initialRoute: RoutesName.settings,
       routes: namedRoutes,
-      // routes: {
-      //   '/': (context) => HomeScreen(),
-      //   '/mypage': (context) => MyPageScreen(),
-      // },
     );
   }
 }

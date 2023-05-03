@@ -10,18 +10,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  /*
+  1. darktheme data
+   */
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("FOOD"),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Text("coffee"),
-          Text("salad"),
-        ])
-      ],
-    ));
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("FOOD"),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              Text("coffee"),
+              Text("salad"),
+            ])
+          ],
+        )),
+      ),
+    );
   }
 }
