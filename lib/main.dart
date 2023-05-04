@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:provider/provider.dart';
 import 'package:user_app/core/routes/routes.dart';
 import 'package:user_app/core/routes/routes_name.dart';
+import 'package:user_app/providers/dark_theme_provider.dart';
 import 'package:user_app/view/explorer_view.dart';
 import 'package:user_app/view/main_view.dart';
 import 'package:user_app/view/mypage_view.dart';
@@ -32,8 +34,9 @@ class _MyAppState extends State<MyApp> {
   // IconData _iconDark = Icons.nights_stay;
 
   ThemeData lightTheme = ThemeData(
-      primarySwatch: Colors.red,
-      scaffoldBackgroundColor: const Color(0xFFEFEFEF));
+    primarySwatch: Colors.red,
+    scaffoldBackgroundColor: const Color(0xFFEFEFEF),
+  );
 
   ThemeData darkTheme = ThemeData(
       primarySwatch: Colors.green,
@@ -50,31 +53,28 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  DarkThemeProvider themeChangeProvider = DarkThemeProvider();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: _isDarkMode ? darkTheme : lightTheme,
-      // theme: ThemeData(
-      //     primarySwatch: Colors.green,
-      //     scaffoldBackgroundColor: const Color(0xFFEFEFEF)),
-      // theme: _isDarkMode ? _darkTheme : _lightTheme,
-
-      // home: Scaffold(
-      //   appBar: AppBar(title: Text("Dark & light theme")),
-      //   body: Center(
-      //     child: ElevatedButton(
-      //       onPressed: () {
-      //         _switchTheme();
-      //       },
-      //       child: Text('theme change'),
-      //     ),
-      //   ),
-      // ),
-
-      initialRoute: RoutesName.settings,
-      routes: namedRoutes,
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<DarkThemeProvider>(
+            // create: (_) => DarkThemeProvider(),
+            create: (_) {
+              return themeChangeProvider;
+            },
+          )
+        ],
+        child:
+            Consumer<DarkThemeProvider>(builder: (context, themeData, child) {
+          return MaterialApp(
+            title: 'my app',
+            theme: themeChangeProvider.darkTheme ? darkTheme : lightTheme,
+            initialRoute: RoutesName.settings,
+            routes: namedRoutes,
+          );
+        }));
   }
 }
 
