@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:provider/provider.dart';
+import 'package:user_app/constants/theme_data.dart';
 import 'package:user_app/core/routes/routes.dart';
 import 'package:user_app/core/routes/routes_name.dart';
 import 'package:user_app/providers/dark_theme_provider.dart';
@@ -70,7 +71,8 @@ class _MyAppState extends State<MyApp> {
             Consumer<DarkThemeProvider>(builder: (context, themeData, child) {
           return MaterialApp(
             title: 'my app',
-            theme: themeChangeProvider.darkTheme ? darkTheme : lightTheme,
+            // theme: themeChangeProvider.darkTheme ? darkTheme : lightTheme,
+            theme: Styles.themeData(themeChangeProvider.darkTheme, context),
             initialRoute: RoutesName.settings,
             routes: namedRoutes,
           );
