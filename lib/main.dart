@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
             title: 'my app',
             // theme: themeChangeProvider.darkTheme ? darkTheme : lightTheme,
             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-            initialRoute: RoutesName.settings,
+            initialRoute: RoutesName.portal,
             routes: namedRoutes,
           );
         }));
