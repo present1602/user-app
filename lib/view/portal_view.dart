@@ -91,11 +91,13 @@ class _PortalScreenState extends State<PortalScreen> {
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: Row(children: [
-                      Expanded(
-                          child: Text("FOOD",
-                              style: Theme.of(context).textTheme.titleMedium!
-                              // .copyWith(color: Theme.of(context).colorScheme.primary),
-                              )),
+                      GestureDetector(
+                        child: Expanded(
+                            child: Text("FOOD",
+                                style: Theme.of(context).textTheme.titleMedium!
+                                // .copyWith(color: Theme.of(context).colorScheme.primary),
+                                )),
+                      ),
                       Icon(Icons.chevron_right)
                     ]),
                   ),

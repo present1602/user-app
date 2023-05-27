@@ -4,5 +4,4 @@ class RoutesName {
   static const explorer = '/explorer';
   static const settings = '/settings';
   static const mypage = '/mypage';
-  static const portal = '/portal';
 }
